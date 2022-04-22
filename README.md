@@ -32,7 +32,19 @@ https://docs.reach.sh/tut/rps/#p_135
 
 "In Reach, non-participation is handled through a "timeout" mechanism whereby each consensus transfer can be paired with a step that occurs for all participants if the originator of the consensus transfer fails to make the required publication before a particular network time." [source](https://docs.reach.sh/tut/rps/#p_221)
 
+"To write an application in Reach that runs arbitrarily long, like a game of Rock, Paper, Scissors that is guaranteed to not end in a draw...you can use a while loop that runs until the outcome of the game is decided. [source](https://docs.reach.sh/tut/rps/#p_303)
+
+"When you check if a program with a while loop is correct, you need to have a property called a loop invariant. 
+- The part of the program before the while loop must establish the invariant.
+- The condition and the body of the loop must establish the invariant.
+- The negation of the condition and the invariant must establish any properties of the rest of the program.
+[source](https://docs.reach.sh/tut/rps/#p_305)
+
 [Guide to loops on Reach](https://docs.reach.sh/guide/loop-invs/#guide-loop-invs)
 
 Methods 
 - `informTimout`
+- `acceptWager`
+- `getHand`
+- `seeOutcome`
+
