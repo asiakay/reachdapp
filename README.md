@@ -32,5 +32,7 @@ https://docs.reach.sh/tut/rps/#p_135
 
 "In Reach, non-participation is handled through a "timeout" mechanism whereby each consensus transfer can be paired with a step that occurs for all participants if the originator of the consensus transfer fails to make the required publication before a particular network time." [source](https://docs.reach.sh/tut/rps/#p_221)
 
+[Guide to loops on Reach](https://docs.reach.sh/guide/loop-invs/#guide-loop-invs)
+
 Methods 
 - `informTimout`
