@@ -32,11 +32,15 @@ await Promise.all([
                 // implement Alice's interact object here
 
         ...Player('Alice'),
+        wager: stdlib.parseCurrency(5),
     }),
     ctcBob.p.Bob({
                 // implement Bob's interact object here
 
         ...Player('Bob'),
+        acceptWager: (amt) => {
+            console.log(`Bob accepts the wager of ${fmt(amt)}.`);
+        },
     }),
 ]);
 
