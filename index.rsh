@@ -25,17 +25,14 @@ const Player = {
 
 export const main = Reach.App(() => {
     const Alice = Participant('Alice', {
-        // Specify Alice's interact interface here
         ...Player,
         wager: UInt,
     });
     const Bob = Participant('Bob', {
-        // Specify Bob's interact interface here
         ...Player,
         acceptWager: Fun([UInt], Null),
     });
     init();
-    // write the program here
     Alice.only(() => {
         const wager = declassify(interact.wager);
         const _handAlice = interact.getHand();
@@ -47,19 +44,23 @@ export const main = Reach.App(() => {
         .pay(wager);
     commit(); 
 
-    unknowable(Bob, Alice(handAlice));
-
+    unknowable(Bob, Alice(_handAlice, _saltAlice));
     Bob.only(() => {
         interact.acceptWager(wager);
         const handBob = declassify(interact.getHand());
     });
-
     Bob.publish(handBob)
         .pay(wager);
+    commit();
 
-    const outcome = (handAlice + (4 - handBob)) % 3;
-    
+    Alice.only(() => {
+        const saltAlice = declassify(_saltAlice);
+        const handAlice = declassify(_handAlice);
+    });
+    Alice.publish(saltAlice, handAlice);
+    checkCommitment(commitAlice, saltAlice, handAlice);
 
+    const outcome = winner(handAlice, handBob);  
     const [forAlice, forBob] = 
         outcome == 2 ? [ 2, 0 ] : 
         outcome == 0 ? [ 0, 2 ] :
