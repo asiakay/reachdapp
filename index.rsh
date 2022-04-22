@@ -36,9 +36,9 @@ export const main = Reach.App(() => {
     });
     init();
 
-    const informTimeout = () => { // <- calling method to inform each participant of the timeout
-        each([Alice, Bob], () => {
-            interact.informTimeout();
+    const informTimeout = () => { // <- defines the function as an arrow expression
+        each([Alice, Bob], () => { // <- has each participants perform a local step
+            interact.informTimeout(); // <- has them call the new informTimeout method
         });
     } 
     Alice.only(() => {
@@ -46,9 +46,10 @@ export const main = Reach.App(() => {
         const _handAlice = interact.getHand();
         const [_commitAlice, _saltAlice] = makeCommitment(interact, _handAlice);
         const commitAlice = declassify(_commitAlice);
+        const deadline = declassify(interact.deadline); // <- has ALice declassify the deadline time delta
     });
 
-    Alice.publish(wager, commitAlice)
+    Alice.publish(wager, commitAlice, deadline) // <- has Alice publish the deadline
         .pay(wager);
     commit(); 
 
@@ -58,14 +59,16 @@ export const main = Reach.App(() => {
         const handBob = declassify(interact.getHand());
     });
     Bob.publish(handBob)
-        .pay(wager);
+        .pay(wager)
+        .timeout(relativeTime(deadline), () => closeTo(Alice, informTimeout)); // <- adds timeout handler to Bob's publication
     commit();
 
     Alice.only(() => {
         const saltAlice = declassify(_saltAlice);
         const handAlice = declassify(_handAlice);
     });
-    Alice.publish(saltAlice, handAlice);
+    Alice.publish(saltAlice, handAlice)
+        .timeout(relativeTime(deadline), () => closeTo(Bob, informTimeout));
     checkCommitment(commitAlice, saltAlice, handAlice);
 
     const outcome = winner(handAlice, handBob);  
