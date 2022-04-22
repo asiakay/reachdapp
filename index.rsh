@@ -30,4 +30,7 @@ export const main = Reach.App(() =>{
     const outcome = (handAlice + (4 - handBob)) % 3;
     commit();
 
+    each([Alice, Bob], () => {
+        interact.seeOutcome(outcome);
+    });
 });
