@@ -33,6 +33,12 @@ export const main = Reach.App(() => {
         .pay(wager);
 
     const outcome = (handAlice + (4 - handBob)) % 3;
+    const [forAlice, forBob] = 
+        outcome == 2 ? [ 2, 0 ] :
+        outcome == 0 ? [ 0, 2 ] :
+        /* tie */ [ 1, 1 ];
+    transfer(forAlice * wager).to(Alice);
+    transfer(forBob * wager).to(Bob);
     commit();
 
     each([Alice, Bob], () => {
