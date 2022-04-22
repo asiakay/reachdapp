@@ -17,3 +17,4 @@ https://docs.reach.sh/tut/rps/#p_91
 through the `pay` primitive that can be added to a `publish` primitive to send funds to the Reach program, which can then use the transfer primitive to send funds back to participants, and other addresses."
 https://docs.reach.sh/tut/rps/#p_135
 
+[Reach verification engine](https://docs.reach.sh/guide/assert/#guide-assert) 

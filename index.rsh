@@ -29,18 +29,17 @@ export const main = Reach.App(() => {
 
     Bob.only(() => {
         interact.acceptWager(wager);
-        const handBob = (handAlice + 1) % 3;
+        const handBob = declassify(interact.getHand());
     });
 
     Bob.publish(handBob)
         .pay(wager);
 
     const outcome = (handAlice + (4 - handBob)) % 3;
-    require(handBob == (handAlice + 1) % 3);
-    assert(outcome == 0);
     
+
     const [forAlice, forBob] = 
-        outcome == 2 ? [ 2, 0 ] :
+        outcome == 2 ? [ 1, 0 ] : // <- Oops. was: [2, 0]
         outcome == 0 ? [ 0, 2 ] :
         /* tie */ [ 1, 1 ];
     transfer(forAlice * wager).to(Alice);
