@@ -38,10 +38,12 @@ export const main = Reach.App(() => {
     // write the program here
     Alice.only(() => {
         const wager = declassify(interact.wager);
-        const handAlice = declassify(interact.getHand());
+        const _handAlice = interact.getHand();
+        const [_commitAlice, _saltAlice] = makeCommitment(interact, _handAlice);
+        const commitAlice = declassify(_commitAlice);
     });
 
-    Alice.publish(wager, handAlice)
+    Alice.publish(wager, commitAlice)
         .pay(wager);
     commit(); 
 

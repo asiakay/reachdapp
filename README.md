@@ -18,3 +18,7 @@ through the `pay` primitive that can be added to a `publish` primitive to send f
 https://docs.reach.sh/tut/rps/#p_135
 
 [Reach verification engine](https://docs.reach.sh/guide/assert/#guide-assert) 
+
+[How does Reach and the symbolic execution engine work?](https://docs.reach.sh/guide/reach/#guide-reach)
+
+[Cryptographic commitment scheme](https://en.wikipedia.org/wiki/Commitment_scheme) included in Reach's standard library with [`makeCommitment`](https://docs.reach.sh/tut/rps/#p_187) as to not reveal each participant's hand prematurely
