@@ -21,6 +21,7 @@ const Player = {
     ...hasRandom,
     getHand: Fun([], UInt),
     seeOutcome: Fun([UInt], Null),
+    informTimeout: Fun([], Null), /* <= new */
 };
 
 export const main = Reach.App(() => {
@@ -62,8 +63,8 @@ export const main = Reach.App(() => {
 
     const outcome = winner(handAlice, handBob);  
     const [forAlice, forBob] = 
-        outcome == 2 ? [ 2, 0 ] : 
-        outcome == 0 ? [ 0, 2 ] :
+        outcome == A_WINS ? [ 2, 0 ] : 
+        outcome == B_WINS ? [ 0, 2 ] :
         /* tie */ [ 1, 1 ];
     transfer(forAlice * wager).to(Alice);
     transfer(forBob * wager).to(Bob);
