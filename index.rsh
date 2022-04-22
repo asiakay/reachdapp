@@ -17,7 +17,9 @@ export const main = Reach.App(() =>{
     init();
     // write the program here
     Alice.only(() =>{
-        
-    }) 
+        const handAlice = declassify(interact.getHand());
+    });
+    Alice.publish(handAlice);
+    commit(); 
 
 });
