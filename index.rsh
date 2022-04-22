@@ -9,10 +9,12 @@ export const main = Reach.App(() => {
     const Alice = Participant('Alice', {
         // Specify Alice's interact interface here
         ...Player,
+        wager: UInt,
     });
     const Bob = Participant('Bob', {
         // Specify Bob's interact interface here
         ...Player,
+        acceptWager: Fun([UInt], Null),
     });
     init();
     // write the program here
@@ -27,8 +29,9 @@ export const main = Reach.App(() => {
 
     Bob.only(() => {
         interact.acceptWager(wager);
-        const handBob = declassify(interact.getHand());
+        const handBob = (handAlice + 1) % 3;
     });
+    
     Bob.publish(handBob)
         .pay(wager);
 
