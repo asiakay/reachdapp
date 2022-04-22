@@ -17,8 +17,20 @@ https://docs.reach.sh/tut/rps/#p_91
 through the `pay` primitive that can be added to a `publish` primitive to send funds to the Reach program, which can then use the transfer primitive to send funds back to participants, and other addresses."
 https://docs.reach.sh/tut/rps/#p_135
 
+"In a decentralized application when one participant refuses to take the next step of the program, for example, if Alice refuses to share her hand with Bob in a game of ‘Rock, Paper, Scissors’... if the developer used Reach, the default is the program hangs forever waiting for Alice to provide the value. Or the developer could include a timeout block to punish Alice and the allow the program to proceed as-if Bob were the winner because Reach empowers programmers to design the application with the business logic they want" [source](https://docs.reach.sh/tut/rps/#p_248)
+
+
 [Reach verification engine](https://docs.reach.sh/guide/assert/#guide-assert) 
 
 [How does Reach and the symbolic execution engine work?](https://docs.reach.sh/guide/reach/#guide-reach)
 
 [Cryptographic commitment scheme](https://en.wikipedia.org/wiki/Commitment_scheme) included in Reach's standard library with [`makeCommitment`](https://docs.reach.sh/tut/rps/#p_187) as to not reveal each participant's hand prematurely
+
+[What is non-participation and how to protect against it with Reach?](https://docs.reach.sh/guide/timeout/#guide-timeout) 
+
+"Non-participation refers to the act of one party ceasing to continue playing their role in an application." [source](https://docs.reach.sh/tut/rps/#p_216)
+
+"In Reach, non-participation is handled through a "timeout" mechanism whereby each consensus transfer can be paired with a step that occurs for all participants if the originator of the consensus transfer fails to make the required publication before a particular network time." [source](https://docs.reach.sh/tut/rps/#p_221)
+
+Methods 
+- `informTimout`
