@@ -26,9 +26,11 @@ export const main = Reach.App(() => {
     commit(); 
 
     Bob.only(() => {
+        interact.acceptWager(wager);
         const handBob = declassify(interact.getHand());
     });
-    Bob.publish(handBob);
+    Bob.publish(handBob)
+        .pay(wager);
 
     const outcome = (handAlice + (4 - handBob)) % 3;
     commit();
