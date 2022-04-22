@@ -35,6 +35,12 @@ export const main = Reach.App(() => {
         acceptWager: Fun([UInt], Null),
     });
     init();
+
+    const informTimeout = () => { // <- calling method to inform each participant of the timeout
+        each([Alice, Bob], () => {
+            interact.informTimeout();
+        });
+    } 
     Alice.only(() => {
         const wager = declassify(interact.wager);
         const _handAlice = interact.getHand();
