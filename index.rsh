@@ -5,7 +5,7 @@ const Player = {
     seeOutcome: Fun([UInt], Null),
 };
 
-export const main = Reach.App(() =>{
+export const main = Reach.App(() => {
     const Alice = Participant('Alice', {
         // Specify Alice's interact interface here
         ...Player,
@@ -16,9 +16,10 @@ export const main = Reach.App(() =>{
     });
     init();
     // write the program here
-    Alice.only(() =>{
+    Alice.only(() => {
         const handAlice = declassify(interact.getHand());
     });
+    
     Alice.publish(handAlice);
     commit(); 
 
