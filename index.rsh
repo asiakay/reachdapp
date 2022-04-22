@@ -17,10 +17,12 @@ export const main = Reach.App(() => {
     init();
     // write the program here
     Alice.only(() => {
+        const wager = declassify(interact.wager);
         const handAlice = declassify(interact.getHand());
     });
-    
-    Alice.publish(handAlice);
+
+    Alice.publish(wager, handAlice)
+        .pay(wager);
     commit(); 
 
     Bob.only(() => {
